@@ -41,6 +41,7 @@ import { getTodayDateString, calculateBirthdayInfo, formatReadableDate } from '.
 import { formatCurrency } from '../utils/currency';
 import { DayFlowQuote, getNextQuote } from '../data/quotes';
 import { QuickLinksPanel } from '../components/QuickLinksPanel';
+import { formatShortcut } from '../utils/shortcuts';
 
 const DEFAULT_WIDGETS: DashboardWidgetConfig[] = [
   { id: 'todayTasks', label: "Today's Tasks", visible: true, order: 0, size: 'wide' },
@@ -97,6 +98,7 @@ export const MyDayView: React.FC = () => {
   } = useApp();
 
   const todayStr = getTodayDateString();
+  const quickAddShortcut = formatShortcut('N', true);
   const [scratchpadText, setScratchpadText] = useState('');
   const [scratchpadSaved, setScratchpadSaved] = useState(false);
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
@@ -306,8 +308,11 @@ export const MyDayView: React.FC = () => {
           <button
             onClick={() => openQuickAddWithTab('task')}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-accent-theme text-white text-xs font-semibold hover:opacity-95 transition-all shadow-xs"
+            title={`New Task (${quickAddShortcut})`}
           >
-            <Plus className="w-3.5 h-3.5" /> New Task
+            <Plus className="w-3.5 h-3.5" />
+            New Task
+            <kbd className="hidden sm:inline-block text-[10px] opacity-75 font-mono">{quickAddShortcut}</kbd>
           </button>
         </div>
       </div>

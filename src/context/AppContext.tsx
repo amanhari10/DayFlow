@@ -419,13 +419,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setIsQuickAddOpen(true);
   }, []);
 
-  // Keyboard shortcuts (Cmd/Ctrl + K, Cmd/Ctrl + N, Escape)
+  // Keyboard shortcuts (Cmd/Ctrl + K, Cmd+Option/Ctrl+Alt + N, Escape)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      const hasPrimaryModifier = e.metaKey || e.ctrlKey;
+      if (hasPrimaryModifier && !e.altKey && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setIsSearchOpen((prev) => !prev);
-      } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'n') {
+      } else if (hasPrimaryModifier && e.altKey && !e.shiftKey && e.key.toLowerCase() === 'n') {
         e.preventDefault();
         setIsQuickAddOpen(true);
       } else if (e.key === 'Escape') {

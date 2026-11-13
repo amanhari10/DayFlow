@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar, onOpenNotif
     return `${mins}:${String(secs).padStart(2, '0')}`;
   }, [timeLeft]);
   const searchShortcut = formatShortcut('K');
-  const quickAddShortcut = formatShortcut('N');
+  const quickAddShortcut = formatShortcut('N', true);
 
   return (
     <header className="sticky top-0 z-30 h-16 bg-sidebar/80 backdrop-blur-md border-b border-theme flex items-center justify-between px-4 sm:px-6">

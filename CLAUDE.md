@@ -58,7 +58,7 @@ Read this first when the project folder is uploaded again. It records what the a
    - Each section's individual modules can also be shown or hidden without deleting their data.
 7. **Added productivity and content tools**
    - Kanban task cards can be dragged between To Do, In Progress, and Completed; changes use the existing persisted task status.
-   - Header shortcuts display `⌘K` / `⌘N` on Mac and `Ctrl+K` / `Ctrl+N` on Windows.
+   - Header shortcuts display `⌘K` / `⌘⌥N` on Mac and `Ctrl+K` / `Ctrl+Alt+N` on Windows.
    - Document Vault records can store and open image/PDF attachments locally in IndexedDB (10 MB per file, 20 MB per record).
    - Added 300 original money, productivity, and motivation quotes in `src/data/quotes.ts`; Daily Reflection and Daily Briefing select a random quote on view load and avoid repeating the last quote after refresh.
    - Notes and journal editors have toolbar actions for bold, italic, bullet/numbered lists, and Markdown tables, with formatted preview in both the inline editor and note modal.
@@ -75,8 +75,9 @@ Read this first when the project folder is uploaded again. It records what the a
    - Browser-checked task date, overdue rescheduling, Quick Links add/sidebar visibility, footer links, and quote display on an isolated local origin.
 10. **Calendar event deletion**
    - Existing events can be deleted from the event edit dialog, with a confirmation prompt and visible error feedback if deletion fails.
-11. **Date and time pickers**
-   - Clicking date or time inputs opens the browser's native picker where supported; other browsers retain their built-in input behavior.
+11. **Theme-aware pickers and task shortcut**
+   - Native date/time picker controls follow the app's light/dark theme and accent color.
+   - Quick Add uses `Ctrl+Alt+N` on Windows and `⌘⌥N` on Mac to avoid browser new-window shortcuts.
 
 ## Current dashboard widget IDs
 `todayTasks`, `dailyProgress`, `dailyQuote`, `upcomingEvents`, `upcomingBirthdays`, `habitOverview`, `goalProgress`, `budgetOverview`, `fitnessSummary`, `dailyChecklist`, `upcomingTrips`, `focusTimer`, `overdueTasks` (banner above the grid), `quickNotes`, `quickLinks`.

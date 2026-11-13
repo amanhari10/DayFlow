@@ -5,6 +5,8 @@ export function getShortcutModifier(): string {
   return 'Ctrl+';
 }
 
-export function formatShortcut(key: string): string {
-  return `${getShortcutModifier()}${key}`;
+export function formatShortcut(key: string, useAltModifier = false): string {
+  const modifier = getShortcutModifier();
+  if (!useAltModifier) return `${modifier}${key}`;
+  return modifier === '⌘' ? `${modifier}⌥${key}` : `${modifier}Alt+${key}`;
 }
