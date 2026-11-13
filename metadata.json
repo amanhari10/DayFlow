@@ -1,0 +1,6 @@
+{
+  "name": "DayFlow – Personal Productivity & Life Management",
+  "description": "All-in-one local-first personal productivity dashboard: daily planner, task manager, calendar, birthdays, habits, notes, pomodoro focus, and analytics.",
+  "requestFramePermissions": ["notifications"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
