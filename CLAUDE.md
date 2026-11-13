@@ -11,6 +11,8 @@ Read this first when the project folder is uploaded again. It records what the a
 
 ## How it is run
 - Node.js LTS must be installed.
+- **GitHub:** [amanhari10/DayFlow](https://github.com/amanhari10/DayFlow) is the public repository.
+- This working copy uses `.githooks/post-commit` to push each successful commit to `origin`. Saving a file does not push it; commit changes first. For another clone, enable the hook with `git config core.hooksPath .githooks`.
 - **Daily use (built version):** `run-server.bat` builds if `dist` is missing, then runs `vite preview` on port 3000 (`--strictPort`).
 - **Auto-start on sign-in:** `install-autostart.bat` adds a shortcut to the Windows Startup folder that launches `start-hidden.vbs`, which runs `run-server.bat` hidden. `uninstall-autostart.bat` removes it.
 - **Live editing:** `npm run dev -- --host 127.0.0.1` (port 3000). Saved changes reload the browser automatically.
@@ -60,6 +62,10 @@ Read this first when the project folder is uploaded again. It records what the a
    - Document Vault records can store and open image/PDF attachments locally in IndexedDB (10 MB per file, 20 MB per record).
    - Added 300 original money, productivity, and motivation quotes in `src/data/quotes.ts`; Daily Reflection and Daily Briefing select a random quote on view load and avoid repeating the last quote after refresh.
    - Notes and journal editors have toolbar actions for bold, italic, bullet/numbered lists, and Markdown tables, with formatted preview in both the inline editor and note modal.
+8. **Published to GitHub**
+   - Created the public `amanhari10/DayFlow` repository and pushed the project to `main`.
+   - Configured automatic push after each local commit using `.githooks/post-commit`.
+   - Replaced the original AI Studio README with DayFlow setup, data-storage, and sync instructions.
 
 ## Current dashboard widget IDs
 `todayTasks`, `dailyProgress`, `dailyQuote`, `upcomingEvents`, `upcomingBirthdays`, `habitOverview`, `goalProgress`, `budgetOverview`, `fitnessSummary`, `dailyChecklist`, `upcomingTrips`, `focusTimer`, `overdueTasks` (banner above the grid), `quickNotes`.
@@ -67,12 +73,13 @@ Read this first when the project folder is uploaded again. It records what the a
 To add a new widget: add it to `DEFAULT_WIDGETS` and to the defaults in `sampleData.ts`, then render it in the MyDayView grid inside `{isWidgetVisible('id') && (<WidgetSlot order={getWidgetOrder('id')} wide={getWidgetSize('id') === 'wide'}> ... </WidgetSlot>)}`.
 
 ## Left to do / open items
-- The owner has not yet confirmed the dashboard, notification, currency, or sidebar customization behaviour in the browser; the current changes pass `tsc --noEmit` and `vite build`, but have not been visually tested.
-- New Kanban drag/drop, vault attachments, random quotes, and rich-text note editing also need visual/browser confirmation; type-check and production build pass.
+- Kanban dragging, Settings section visibility, currency display, quote refresh, and Markdown preview have been browser-checked.
+- Manually test image/PDF upload and reopening in the Document Vault; the upload flow has not been manually browser-tested.
+- Mac shortcut labels have not been visually checked on a Mac; Windows labels were checked in the Windows environment.
 - **Reading module** (sidebar page) is still present. Only the dashboard "Currently Reading" widget was removed. Remove the page if the owner wants.
 - Optional: build real versions of the three removed placeholder widgets (Mini Calendar, Study Progress, Weekly Activity).
 - The new Settings visibility controls hide pages from the sidebar but retain their code and data. Permanently removing modules would be a separate change.
-- Unused or unneeded leftovers: `GEMINI_API_KEY` and `.env.example` (no code reads the key), `@google/genai`, `express`, `dotenv` dependencies, and `metadata.json` / README text from AI Studio. Safe to clean up if wanted.
+- Unused or unneeded leftovers: `GEMINI_API_KEY` and `.env.example` (no code reads the key), `@google/genai`, `express`, `dotenv` dependencies, and `metadata.json` from AI Studio. Safe to clean up if wanted.
 - Not done: a data export/import backup (check Settings for an existing one first), since all data lives only in the browser.
 - Build prints a bundle-size warning (~760 KB JS); harmless for local use.
 
