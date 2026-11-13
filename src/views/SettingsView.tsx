@@ -25,6 +25,7 @@ import { useApp } from '../context/AppContext';
 import { ThemeMode, AccentColor, Priority, CalendarViewType, UserSettings } from '../types';
 import { exportTasksToCSV, exportEventsToCSV, exportBirthdaysToCSV, downloadBlob } from '../utils/helpers';
 import { CURRENCY_OPTIONS } from '../utils/currency';
+import { QuickLinksPanel } from '../components/QuickLinksPanel';
 
 type SidebarSectionKey = keyof UserSettings['sidebarSections'];
 
@@ -419,6 +420,26 @@ export const SettingsView: React.FC = () => {
               </div>
             </section>
           ))}
+          <section className="rounded-xl border border-theme p-4 space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <h4 className="text-sm font-bold text-primary-theme">Quick Links</h4>
+                <p className="mt-1 text-xs text-secondary-theme">
+                  Add websites for one-click access from the dashboard and sidebar.
+                </p>
+              </div>
+              <label className="flex shrink-0 items-center gap-2 text-xs font-medium text-secondary-theme">
+                <input
+                  type="checkbox"
+                  checked={settings.showQuickLinksInSidebar}
+                  onChange={(event) => void updateSettings({ showQuickLinksInSidebar: event.target.checked })}
+                  className="accent-current"
+                />
+                Show in sidebar
+              </label>
+            </div>
+            <QuickLinksPanel />
+          </section>
         </div>
       </div>
 

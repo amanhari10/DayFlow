@@ -54,6 +54,12 @@ export const QuickAddModal: React.FC = () => {
   const [noteContent, setNoteContent] = useState('');
   const [noteCategory, setNoteCategory] = useState<NoteCategory>('general');
 
+  React.useEffect(() => {
+    if (isQuickAddOpen) {
+      setTaskDueDate(getTodayDateString());
+    }
+  }, [isQuickAddOpen]);
+
   if (!isQuickAddOpen) return null;
 
   const handleClose = () => {

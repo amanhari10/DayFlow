@@ -124,7 +124,7 @@ export const DailyBriefingView: React.FC = () => {
           <Quote className="w-4 h-4 text-accent-theme shrink-0 mt-0.5" />
           <p className="italic">
             {todayQuote ? `“${todayQuote.text}” — ` : ''}
-            {todayQuote && <span className="font-semibold text-primary-theme">DayFlow · {todayQuote.category}</span>}
+            {todayQuote && <span className="font-semibold text-primary-theme">{todayQuote.author}</span>}
           </p>
         </div>
       </div>

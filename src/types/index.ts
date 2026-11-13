@@ -532,6 +532,12 @@ export interface SidebarSectionVisibility {
   recordsAnalytics: boolean;
 }
 
+export interface QuickLink {
+  id: string;
+  label: string;
+  url: string;
+}
+
 export interface DashboardWidgetConfig {
   id: string;
   label: string;
@@ -560,6 +566,8 @@ export interface UserSettings {
     longBreak: number;
     longBreakInterval: number;
   };
+  quickLinks: QuickLink[];
+  showQuickLinksInSidebar: boolean;
   dashboardWidgets: DashboardWidgetConfig[];
   enabledModules: Record<string, boolean>;
   morningRoutine: { id: string; title: string; durationMins: number; completed: boolean }[];

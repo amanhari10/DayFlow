@@ -44,6 +44,7 @@ import {
   BrainCircuit,
   MapPin,
   ShieldCheck,
+  Link2,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ActiveView, SidebarSectionVisibility } from '../types';
@@ -342,6 +343,30 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, setMobileOpen }) =
               </div>
             );
           })}
+          {settings.showQuickLinksInSidebar && settings.quickLinks.length > 0 && (
+            <section className="space-y-1">
+              {!sidebarCollapsed && (
+                <h2 className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-secondary-theme/70">
+                  Quick Links
+                </h2>
+              )}
+              {settings.quickLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={sidebarCollapsed ? link.label : undefined}
+                  className={`flex items-center gap-3 rounded-xl px-3 py-2 text-xs font-medium text-secondary-theme transition-colors hover:bg-card-hover hover:text-primary-theme ${
+                    sidebarCollapsed ? 'justify-center px-0' : ''
+                  }`}
+                >
+                  <Link2 className="h-4 w-4 shrink-0" />
+                  {!sidebarCollapsed && <span className="truncate">{link.label}</span>}
+                </a>
+              ))}
+            </section>
+          )}
         </nav>
 
         {/* Live Mini Pomodoro Banner in Sidebar if running and not in Focus View */}

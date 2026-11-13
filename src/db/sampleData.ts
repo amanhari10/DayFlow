@@ -90,7 +90,10 @@ export const DEFAULT_SETTINGS: UserSettings = {
     { id: 'focusTimer', label: 'Focus Pomodoro Widget', visible: true, order: 11, size: 'normal' },
     { id: 'overdueTasks', label: 'Overdue Alerts', visible: true, order: 12, size: 'wide' },
     { id: 'quickNotes', label: 'Scratchpad Note', visible: true, order: 13, size: 'normal' },
+    { id: 'quickLinks', label: 'Quick Links', visible: true, order: 14, size: 'normal' },
   ],
+  quickLinks: [],
+  showQuickLinksInSidebar: true,
   enabledModules: {
     goals: true,
     bucketList: true,

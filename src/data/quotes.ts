@@ -4,6 +4,7 @@ export interface DayFlowQuote {
   id: string;
   category: QuoteCategory;
   text: string;
+  author: string;
 }
 
 const QUOTE_CONTINUATIONS: Record<QuoteCategory, string[]> = {
@@ -92,6 +93,7 @@ export const INSPIRATIONAL_QUOTES: DayFlowQuote[] = (
       id: `${category}-${openerIndex}-${continuationIndex}`,
       category,
       text: `${opener} ${continuation}`,
+      author: 'DayFlow',
     }))
   )
 );

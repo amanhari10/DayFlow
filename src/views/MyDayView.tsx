@@ -33,12 +33,14 @@ import {
   ArrowDown,
   Maximize2,
   Minimize2,
+  Link2,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { DashboardWidgetConfig, Task, WidgetSize } from '../types';
 import { getTodayDateString, calculateBirthdayInfo, formatReadableDate } from '../utils/helpers';
 import { formatCurrency } from '../utils/currency';
 import { DayFlowQuote, getNextQuote } from '../data/quotes';
+import { QuickLinksPanel } from '../components/QuickLinksPanel';
 
 const DEFAULT_WIDGETS: DashboardWidgetConfig[] = [
   { id: 'todayTasks', label: "Today's Tasks", visible: true, order: 0, size: 'wide' },
@@ -55,6 +57,7 @@ const DEFAULT_WIDGETS: DashboardWidgetConfig[] = [
   { id: 'focusTimer', label: 'Focus Pomodoro Widget', visible: true, order: 11, size: 'normal' },
   { id: 'overdueTasks', label: 'Overdue Alerts', visible: true, order: 12, size: 'wide' },
   { id: 'quickNotes', label: 'Scratchpad Note', visible: true, order: 13, size: 'normal' },
+  { id: 'quickLinks', label: 'Quick Links', visible: true, order: 14, size: 'normal' },
 ];
 
 // Wraps each dashboard widget so the saved order and width are actually applied.
@@ -77,6 +80,7 @@ export const MyDayView: React.FC = () => {
     workouts,
     tripPlans,
     toggleTaskComplete,
+    updateTask,
     toggleHabitCheckin,
     setEditingTask,
     openQuickAddWithTab,
@@ -97,6 +101,7 @@ export const MyDayView: React.FC = () => {
   const [scratchpadSaved, setScratchpadSaved] = useState(false);
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [quote, setQuote] = useState<DayFlowQuote | null>(null);
+  const [overdueActionError, setOverdueActionError] = useState('');
 
   useEffect(() => {
     setQuote(getNextQuote());
@@ -123,6 +128,16 @@ export const MyDayView: React.FC = () => {
   const overdueTasks = useMemo(() => {
     return tasks.filter((t) => t.status !== 'completed' && t.dueDate < todayStr);
   }, [tasks, todayStr]);
+
+  const moveOverdueTaskToToday = async (task: Task) => {
+    try {
+      await updateTask({ ...task, dueDate: todayStr });
+      setOverdueActionError('');
+    } catch (error) {
+      console.error('Unable to move overdue task to today:', error);
+      setOverdueActionError(`Could not move "${task.title}" to today. Please try again.`);
+    }
+  };
 
   // Completion percentage
   const completionPercentage = useMemo(() => {
@@ -299,26 +314,50 @@ export const MyDayView: React.FC = () => {
 
       {/* OVERDUE TASKS BANNER */}
       {isWidgetVisible('overdueTasks') && overdueTasks.length > 0 && (
-        <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-500 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-rose-500/20 text-rose-500 shrink-0">
-              <AlertTriangle className="w-5 h-5" />
+        <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-500 space-y-3 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-rose-500/20 text-rose-500 shrink-0">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold">
+                  {overdueTasks.length} Overdue Task{overdueTasks.length > 1 ? 's' : ''} Need Attention
+                </h3>
+                <p className="text-xs text-rose-500/80 mt-0.5">
+                  Choose a task to reschedule it for today.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-bold">
-                {overdueTasks.length} Overdue Task{overdueTasks.length > 1 ? 's' : ''} Need Attention
-              </h3>
-              <p className="text-xs text-rose-500/80 mt-0.5">
-                Earliest: &ldquo;{overdueTasks[0].title}&rdquo; (due {formatReadableDate(overdueTasks[0].dueDate)})
-              </p>
-            </div>
+            <button
+              onClick={() => setActiveView('tasks')}
+              className="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-rose-500 text-white text-xs font-semibold hover:bg-rose-600 transition-colors shrink-0"
+            >
+              View in Tasks →
+            </button>
           </div>
-          <button
-            onClick={() => setActiveView('tasks')}
-            className="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-rose-500 text-white text-xs font-semibold hover:bg-rose-600 transition-colors shrink-0"
-          >
-            View in Tasks →
-          </button>
+          <div className="max-h-64 overflow-y-auto space-y-2">
+            {overdueTasks.map((task) => (
+              <div
+                key={task.id}
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-xl bg-rose-500/5 px-3 py-2"
+              >
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-semibold">{task.title}</p>
+                  <p className="text-[11px] text-rose-500/80">Due {formatReadableDate(task.dueDate)}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void moveOverdueTaskToToday(task)}
+                  aria-label={`Move ${task.title} to today`}
+                  className="self-start sm:self-auto shrink-0 rounded-lg bg-rose-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-rose-600"
+                >
+                  Move to today
+                </button>
+              </div>
+            ))}
+          </div>
+          {overdueActionError && <p role="alert" className="text-xs font-medium">{overdueActionError}</p>}
         </div>
       )}
 
@@ -494,11 +533,8 @@ export const MyDayView: React.FC = () => {
               <blockquote className="text-xs sm:text-sm text-primary-theme italic font-serif leading-relaxed mt-2">
                 {quote ? `“${quote.text}”` : 'Choose one small step that moves you forward.'}
               </blockquote>
-              {quote && <p className="text-xs font-bold text-accent-theme mt-2">— DayFlow · {quote.category}</p>}
+              {quote && <p className="text-xs font-bold text-accent-theme mt-2">— {quote.author}</p>}
             </div>
-            <span className="text-[10px] text-secondary-theme uppercase tracking-wider block mt-4">
-              {quote ? `${quote.category} · Mindset & Focus` : 'Mindset & Focus'}
-            </span>
           </div>
           </WidgetSlot>
         )}
@@ -948,6 +984,18 @@ export const MyDayView: React.FC = () => {
               </button>
             </div>
           </div>
+          </WidgetSlot>
+        )}
+
+        {isWidgetVisible('quickLinks') && (
+          <WidgetSlot order={getWidgetOrder('quickLinks')} wide={getWidgetSize('quickLinks') === 'wide'}>
+            <div className="bg-card rounded-2xl border border-theme p-5 shadow-xs">
+              <div className="flex items-center gap-2 pb-3 border-b border-theme mb-3">
+                <Link2 className="w-4 h-4 text-accent-theme" />
+                <h3 className="font-bold text-sm text-primary-theme">Quick Links</h3>
+              </div>
+              <QuickLinksPanel />
+            </div>
           </WidgetSlot>
         )}
       </div>

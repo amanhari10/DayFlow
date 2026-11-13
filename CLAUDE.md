@@ -27,7 +27,7 @@ Read this first when the project folder is uploaded again. It records what the a
 - `src/views/`: core pages (MyDay, Calendar, Tasks, Birthdays, Habits, Notes, Focus, Analytics, Settings).
 - `src/views/modules/`: life modules (Goals, BucketList, Timeline, SpecialDates, Student, Skills, Career, Knowledge, Finance, Savings, Wishlist, Subscriptions, Fitness, Wellness, Reading, Travel, Meals, Chores, Vault, Decisions).
 - `src/views/productivity/`: DailyBriefing, EisenhowerMatrix, TimeBlocking, Routines, Reviews, Countdowns.
-- `src/components/`: Sidebar, Header, NotificationPanel, and modals.
+- `src/components/`: Sidebar, Header, NotificationPanel, QuickLinksPanel, and modals.
 - `src/data/quotes.ts`: generated original 300-quote reflection collection.
 - `src/components/MarkdownEditor.tsx`: reusable Markdown toolbar and safe formatted preview.
 - Sidebar modules can be turned on or off via `settings.enabledModules` (see `Sidebar.tsx`).
@@ -66,9 +66,16 @@ Read this first when the project folder is uploaded again. It records what the a
    - Created the public `amanhari10/DayFlow` repository and pushed the project to `main`.
    - Configured automatic push after each local commit using `.githooks/post-commit`.
    - Replaced the original AI Studio README with DayFlow setup, data-storage, and sync instructions.
+9. **Task dates, overdue actions, links, footer, and quotes**
+   - Quick Add refreshes a new task's due date from the local system date each time the modal opens. The full task form also defaults to the current local date.
+   - Each overdue task on My Day has a **Move to today** action.
+   - Added persistent user-managed Quick Links on the dashboard and in the sidebar, with a Settings toggle to hide the sidebar links.
+   - Added an app footer crediting Aman and linking to LinkedIn, Instagram, and GitHub.
+   - Quote sections now display only the quote and its attribution. The generated originals are attributed to DayFlow; category labels are not displayed.
+   - Browser-checked task date, overdue rescheduling, Quick Links add/sidebar visibility, footer links, and quote display on an isolated local origin.
 
 ## Current dashboard widget IDs
-`todayTasks`, `dailyProgress`, `dailyQuote`, `upcomingEvents`, `upcomingBirthdays`, `habitOverview`, `goalProgress`, `budgetOverview`, `fitnessSummary`, `dailyChecklist`, `upcomingTrips`, `focusTimer`, `overdueTasks` (banner above the grid), `quickNotes`.
+`todayTasks`, `dailyProgress`, `dailyQuote`, `upcomingEvents`, `upcomingBirthdays`, `habitOverview`, `goalProgress`, `budgetOverview`, `fitnessSummary`, `dailyChecklist`, `upcomingTrips`, `focusTimer`, `overdueTasks` (banner above the grid), `quickNotes`, `quickLinks`.
 
 To add a new widget: add it to `DEFAULT_WIDGETS` and to the defaults in `sampleData.ts`, then render it in the MyDayView grid inside `{isWidgetVisible('id') && (<WidgetSlot order={getWidgetOrder('id')} wide={getWidgetSize('id') === 'wide'}> ... </WidgetSlot>)}`.
 

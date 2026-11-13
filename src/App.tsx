@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { Github, Instagram, Linkedin } from 'lucide-react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
@@ -207,6 +208,41 @@ const AppContent: React.FC = () => {
 
         {/* View Content */}
         <main className="flex-1 pb-16">{renderActiveView()}</main>
+
+        <footer className="border-t border-theme px-4 py-4 sm:px-8">
+          <div className="flex flex-col items-center justify-between gap-3 text-xs text-secondary-theme sm:flex-row">
+            <p>Developed by <span className="font-semibold text-primary-theme">Aman</span></p>
+            <nav aria-label="Aman social profiles" className="flex items-center gap-4">
+              <a
+                href="https://www.linkedin.com/in/amanharisaxena/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-accent-theme"
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/amanhari.saxena/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-accent-theme"
+              >
+                <Instagram className="h-4 w-4" />
+                Instagram
+              </a>
+              <a
+                href="https://github.com/amanhari10"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-accent-theme"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+            </nav>
+          </div>
+        </footer>
       </div>
 
       {/* Global Interactive Modals */}
