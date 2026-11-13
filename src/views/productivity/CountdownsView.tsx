@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { getTodayDateString, calculateBirthdayInfo } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 interface CustomCountdown {
   id: string;
@@ -271,12 +272,12 @@ export const CountdownsView: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-medium text-secondary-theme mb-1">Target Date</label>
-                <input
+                <DateTimePicker
                   type="date"
                   required
                   value={targetDate}
-                  onChange={(e) => setTargetDate(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                  onChange={setTargetDate}
+                  ariaLabel="Countdown target date"
                 />
               </div>
 

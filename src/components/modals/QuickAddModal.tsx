@@ -8,6 +8,7 @@ import { X, CheckSquare, Calendar, Gift, Flame, FileText } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Priority, EventCategory, RelationshipType, HabitFrequency, NoteCategory } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../DateTimePicker';
 
 export const QuickAddModal: React.FC = () => {
   const {
@@ -237,11 +238,11 @@ export const QuickAddModal: React.FC = () => {
                 autoFocus
               />
               <div className="grid grid-cols-2 gap-3">
-                <input
+                <DateTimePicker
                   type="date"
                   value={taskDueDate}
-                  onChange={(e) => setTaskDueDate(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-input-theme border border-theme text-sm"
+                  onChange={setTaskDueDate}
+                  ariaLabel="Task due date"
                 />
                 <select
                   value={taskPriority}
@@ -274,17 +275,17 @@ export const QuickAddModal: React.FC = () => {
                 autoFocus
               />
               <div className="grid grid-cols-2 gap-3">
-                <input
+                <DateTimePicker
                   type="date"
                   value={eventDate}
-                  onChange={(e) => setEventDate(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-input-theme border border-theme text-sm"
+                  onChange={setEventDate}
+                  ariaLabel="Event date"
                 />
-                <input
+                <DateTimePicker
                   type="time"
                   value={eventTime}
-                  onChange={(e) => setEventTime(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-input-theme border border-theme text-sm"
+                  onChange={setEventTime}
+                  ariaLabel="Event time"
                 />
               </div>
               <button
@@ -307,11 +308,11 @@ export const QuickAddModal: React.FC = () => {
                 autoFocus
               />
               <div className="grid grid-cols-2 gap-3">
-                <input
+                <DateTimePicker
                   type="date"
                   value={bdayDate}
-                  onChange={(e) => setBdayDate(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-input-theme border border-theme text-sm"
+                  onChange={setBdayDate}
+                  ariaLabel="Birthday date"
                 />
                 <select
                   value={bdayRelation}

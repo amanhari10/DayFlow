@@ -8,6 +8,7 @@ import { X, Gift, AlertCircle, Heart, Bell } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Birthday, RelationshipType, BirthdayReminderPref } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../DateTimePicker';
 
 interface BirthdayModalProps {
   isOpen: boolean;
@@ -166,12 +167,12 @@ export const BirthdayModal: React.FC<BirthdayModalProps> = ({ isOpen, onClose, b
               <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                 Birthdate (Month & Day) *
               </label>
-              <input
+              <DateTimePicker
                 type="date"
                 required
                 value={birthdate}
-                onChange={(e) => setBirthdate(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                onChange={setBirthdate}
+                ariaLabel="Birthday date"
               />
             </div>
             <div>

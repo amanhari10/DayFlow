@@ -9,6 +9,7 @@ import { useApp } from '../../context/AppContext';
 import { Subscription } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
 import { formatCurrency } from '../../utils/currency';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const SubscriptionsView: React.FC = () => {
   const { subscriptions, addSubscription, updateSubscription, deleteSubscription, settings } = useApp();
@@ -216,12 +217,12 @@ export const SubscriptionsView: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Next Renewal Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={nextRenewal}
-                    onChange={(e) => setNextRenewal(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setNextRenewal}
+                    ariaLabel="Subscription next renewal date"
                   />
                 </div>
               </div>

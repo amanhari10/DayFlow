@@ -8,6 +8,7 @@ import { X, Calendar, Clock, MapPin, Tag, Repeat, AlertCircle, Trash2 } from 'lu
 import { useApp } from '../../context/AppContext';
 import { CalendarEvent, EventCategory, RecurrencePattern } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../DateTimePicker';
 
 interface EventModalProps {
   isOpen: boolean;
@@ -197,23 +198,23 @@ export const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, event, 
               <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                 <Calendar className="w-3.5 h-3.5 inline mr-1" /> Start Date
               </label>
-              <input
+              <DateTimePicker
                 type="date"
                 required
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                onChange={setDate}
+                ariaLabel="Event start date"
               />
             </div>
             <div>
               <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                 <Calendar className="w-3.5 h-3.5 inline mr-1" /> End Date (Optional)
               </label>
-              <input
+              <DateTimePicker
                 type="date"
                 value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                onChange={setEndDate}
+                ariaLabel="Event end date"
               />
             </div>
           </div>
@@ -224,24 +225,24 @@ export const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, event, 
                 <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                   <Clock className="w-3.5 h-3.5 inline mr-1" /> Start Time
                 </label>
-                <input
+                <DateTimePicker
                   type="time"
                   required
                   value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                  onChange={setStartTime}
+                  ariaLabel="Event start time"
                 />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                   <Clock className="w-3.5 h-3.5 inline mr-1" /> End Time
                 </label>
-                <input
+                <DateTimePicker
                   type="time"
                   required
                   value={endTime}
-                  onChange={(e) => setEndTime(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                  onChange={setEndTime}
+                  ariaLabel="Event end time"
                 />
               </div>
             </div>

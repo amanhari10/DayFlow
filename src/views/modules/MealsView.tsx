@@ -18,6 +18,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { MealPlanItem } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const MealsView: React.FC = () => {
   const { mealPlans, addMeal, updateMeal, deleteMeal } = useApp();
@@ -300,12 +301,12 @@ export const MealsView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-secondary-theme mb-1">Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                    onChange={setDate}
+                    ariaLabel="Meal plan date"
                   />
                 </div>
 

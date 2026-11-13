@@ -8,6 +8,7 @@ import { Award, Plus, Star, CheckCircle, ExternalLink, Trash2, Calendar, ShieldC
 import { useApp } from '../../context/AppContext';
 import { SkillCert } from '../../types';
 import { formatReadableDate } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const SkillsView: React.FC = () => {
   const { skillsCerts, addSkillCert, updateSkillCert, deleteSkillCert } = useApp();
@@ -203,20 +204,20 @@ export const SkillsView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Issue Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={issueDate}
-                    onChange={(e) => setIssueDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setIssueDate}
+                    ariaLabel="Certificate issue date"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Expiry Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={expiryDate}
-                    onChange={(e) => setExpiryDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setExpiryDate}
+                    ariaLabel="Certificate expiry date"
                   />
                 </div>
               </div>

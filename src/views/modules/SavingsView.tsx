@@ -9,6 +9,7 @@ import { useApp } from '../../context/AppContext';
 import { SavingsGoal } from '../../types';
 import { formatReadableDate, triggerCelebration } from '../../utils/helpers';
 import { formatCurrency } from '../../utils/currency';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const SavingsView: React.FC = () => {
   const { savingsGoals, addSavingsGoal, updateSavingsGoal, deleteSavingsGoal, settings } = useApp();
@@ -216,11 +217,11 @@ export const SavingsView: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Target Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={deadline}
-                    onChange={(e) => setDeadline(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setDeadline}
+                    ariaLabel="Savings target date"
                   />
                 </div>
               </div>

@@ -19,6 +19,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { TripPlan, PackingItem, TripActivity } from '../../types';
 import { getTodayDateString, triggerCelebration } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const TravelView: React.FC = () => {
   const { tripPlans, addTrip, updateTrip, deleteTrip } = useApp();
@@ -315,23 +316,23 @@ export const TravelView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-secondary-theme mb-1">Start Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                    onChange={setStartDate}
+                    ariaLabel="Trip start date"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-secondary-theme mb-1">End Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                    onChange={setEndDate}
+                    ariaLabel="Trip end date"
                   />
                 </div>
               </div>

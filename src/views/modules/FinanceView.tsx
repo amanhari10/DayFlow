@@ -9,6 +9,7 @@ import { useApp } from '../../context/AppContext';
 import { ExpenseTransaction } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
 import { formatCurrency, getCurrencySymbol } from '../../utils/currency';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const FinanceView: React.FC = () => {
   const { expenses, addExpense, deleteExpense, settings } = useApp();
@@ -235,12 +236,12 @@ export const FinanceView: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setDate}
+                    ariaLabel="Transaction date"
                   />
                 </div>
               </div>

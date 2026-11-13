@@ -8,6 +8,7 @@ import { X, Plus, Trash2, Calendar, Clock, Tag, AlertCircle, Repeat, CheckSquare
 import { useApp } from '../../context/AppContext';
 import { Task, Priority, TaskStatus, RecurrencePattern, Subtask } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../DateTimePicker';
 
 interface TaskModalProps {
   isOpen: boolean;
@@ -210,23 +211,23 @@ export const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) =
               <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                 <Calendar className="w-3.5 h-3.5 inline mr-1" /> Due Date
               </label>
-              <input
+              <DateTimePicker
                 type="date"
                 required
                 value={dueDate}
-                onChange={(e) => setDueDate(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                onChange={setDueDate}
+                ariaLabel="Task due date"
               />
             </div>
             <div>
               <label className="block text-xs font-semibold text-secondary-theme uppercase tracking-wider mb-1">
                 <Clock className="w-3.5 h-3.5 inline mr-1" /> Due Time (Optional)
               </label>
-              <input
+              <DateTimePicker
                 type="time"
                 value={dueTime}
-                onChange={(e) => setDueTime(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-input-theme border border-theme focus:outline-hidden focus:ring-2 ring-accent-theme text-sm"
+                onChange={setDueTime}
+                ariaLabel="Task due time"
               />
             </div>
           </div>

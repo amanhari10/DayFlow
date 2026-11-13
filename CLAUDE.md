@@ -75,8 +75,8 @@ Read this first when the project folder is uploaded again. It records what the a
    - Browser-checked task date, overdue rescheduling, Quick Links add/sidebar visibility, footer links, and quote display on an isolated local origin.
 10. **Calendar event deletion**
    - Existing events can be deleted from the event edit dialog, with a confirmation prompt and visible error feedback if deletion fails.
-11. **Theme-aware pickers and task shortcut**
-   - Native date/time picker controls follow the app's light/dark theme and accent color.
+11. **Custom date/time pickers and task shortcut**
+   - Replaced browser-native date/time popups with custom calendar and time selectors styled to match the app theme, for consistent controls across forms.
    - Quick Add uses `Ctrl+Alt+N` on Windows and `⌘⌥N` on Mac to avoid browser new-window shortcuts.
 
 ## Current dashboard widget IDs

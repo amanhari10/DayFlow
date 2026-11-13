@@ -18,6 +18,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { HouseholdChore } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const ChoresView: React.FC = () => {
   const { householdChores, addChore, updateChore, deleteChore, toggleChoreDone } = useApp();
@@ -309,12 +310,12 @@ export const ChoresView: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-medium text-secondary-theme mb-1">Next Due Date</label>
-                <input
+                <DateTimePicker
                   type="date"
                   required
                   value={nextDue}
-                  onChange={(e) => setNextDue(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                  onChange={setNextDue}
+                  ariaLabel="Chore next due date"
                 />
               </div>
 

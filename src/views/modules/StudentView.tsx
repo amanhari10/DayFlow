@@ -8,6 +8,7 @@ import { GraduationCap, Plus, BookOpen, CheckSquare, Trash2, Calendar, Award } f
 import { useApp } from '../../context/AppContext';
 import { StudentCourse, CourseAssignment } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const StudentView: React.FC = () => {
   const { studentCourses, addCourse, updateCourse, deleteCourse } = useApp();
@@ -315,12 +316,12 @@ export const StudentView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Due Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={assignDueDate}
-                    onChange={(e) => setAssignDueDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setAssignDueDate}
+                    ariaLabel="Assignment due date"
                   />
                 </div>
                 <div>

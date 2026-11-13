@@ -22,6 +22,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { VaultAttachment, VaultDocument } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 const MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024;
 const MAX_TOTAL_ATTACHMENT_SIZE = 20 * 1024 * 1024;
@@ -493,21 +494,21 @@ export const VaultView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-secondary-theme mb-1">Issue Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={issueDate}
-                    onChange={(e) => setIssueDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                    onChange={setIssueDate}
+                    ariaLabel="Document issue date"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-secondary-theme mb-1">Expiry / Renewal</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={expiryDate}
-                    onChange={(e) => setExpiryDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                    onChange={setExpiryDate}
+                    ariaLabel="Document expiry date"
                   />
                 </div>
               </div>

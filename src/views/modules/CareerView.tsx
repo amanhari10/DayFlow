@@ -8,6 +8,7 @@ import { Briefcase, Plus, ExternalLink, Calendar, Trash2, ArrowRight } from 'luc
 import { useApp } from '../../context/AppContext';
 import { JobApplication, JobStatus } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 const PIPELINE_COLUMNS: { status: JobStatus; label: string; color: string }[] = [
   { status: 'wishlist', label: 'Wishlist & Target', color: 'border-slate-500' },
@@ -222,20 +223,20 @@ export const CareerView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Applied Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={appliedDate}
-                    onChange={(e) => setAppliedDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setAppliedDate}
+                    ariaLabel="Job application date"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Interview Date (Optional)</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     value={interviewDate}
-                    onChange={(e) => setInterviewDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setInterviewDate}
+                    ariaLabel="Interview date"
                   />
                 </div>
               </div>

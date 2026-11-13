@@ -19,6 +19,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { WorkoutLog, ExerciseSet } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const FitnessView: React.FC = () => {
   const { workouts, addWorkout, updateWorkout, deleteWorkout } = useApp();
@@ -345,14 +346,13 @@ export const FitnessView: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-medium text-secondary-theme mb-1">Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
-                  >
-                  </input>
+                    onChange={setDate}
+                    ariaLabel="Workout date"
+                  />
                 </div>
               </div>
 

@@ -17,6 +17,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { DecisionItem } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const DecisionsView: React.FC = () => {
   const { decisionItems, addDecision, updateDecision, deleteDecision } = useApp();
@@ -250,12 +251,12 @@ export const DecisionsView: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-medium text-secondary-theme mb-1">Date</label>
-                <input
+                <DateTimePicker
                   type="date"
                   required
                   value={decisionDate}
-                  onChange={(e) => setDecisionDate(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                  onChange={setDecisionDate}
+                  ariaLabel="Decision date"
                 />
               </div>
 

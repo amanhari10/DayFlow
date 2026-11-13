@@ -22,6 +22,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { WellnessLog } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const WellnessView: React.FC = () => {
   const { wellnessLogs, addWellnessLog, updateWellnessLog, deleteWellnessLog } = useApp();
@@ -292,12 +293,12 @@ export const WellnessView: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-secondary-theme mb-1">Date</label>
-                <input
+                <DateTimePicker
                   type="date"
                   required
                   value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-app border border-theme text-sm text-primary-theme focus:outline-hidden focus:border-accent-theme"
+                  onChange={setDate}
+                  ariaLabel="Wellness log date"
                 />
               </div>
 

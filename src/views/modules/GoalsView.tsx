@@ -8,6 +8,7 @@ import { Target, Plus, CheckCircle2, Circle, Trash2, Calendar, Flag, Sparkles } 
 import { useApp } from '../../context/AppContext';
 import { LifeGoal, Milestone } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const GoalsView: React.FC = () => {
   const { goals, addGoal, updateGoal, deleteGoal } = useApp();
@@ -285,12 +286,12 @@ export const GoalsView: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Target Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={targetDate}
-                    onChange={(e) => setTargetDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-sm"
+                    onChange={setTargetDate}
+                    ariaLabel="Goal target date"
                   />
                 </div>
               </div>

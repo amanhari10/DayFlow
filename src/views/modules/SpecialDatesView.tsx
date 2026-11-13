@@ -8,6 +8,7 @@ import { Heart, Plus, Calendar, Clock, Trash2, UserCheck, MessageCircle } from '
 import { useApp } from '../../context/AppContext';
 import { SpecialDate } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const SpecialDatesView: React.FC = () => {
   const { specialDates, addSpecialDate, updateSpecialDate, deleteSpecialDate } = useApp();
@@ -155,12 +156,12 @@ export const SpecialDatesView: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setDate}
+                    ariaLabel="Special date"
                   />
                 </div>
               </div>

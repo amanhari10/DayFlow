@@ -8,6 +8,7 @@ import { History, Plus, Star, Calendar, Trash2, Tag, Sparkles } from 'lucide-rea
 import { useApp } from '../../context/AppContext';
 import { TimelineMemory } from '../../types';
 import { formatReadableDate, getTodayDateString } from '../../utils/helpers';
+import { DateTimePicker } from '../../components/DateTimePicker';
 
 export const TimelineView: React.FC = () => {
   const { timelineMemories, addMemory, deleteMemory } = useApp();
@@ -157,12 +158,12 @@ export const TimelineView: React.FC = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-secondary-theme uppercase mb-1">Date</label>
-                  <input
+                  <DateTimePicker
                     type="date"
                     required
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-input-theme border border-theme text-xs"
+                    onChange={setDate}
+                    ariaLabel="Timeline date"
                   />
                 </div>
                 <div>
