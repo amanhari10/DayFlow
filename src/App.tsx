@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Github, Instagram, Linkedin } from 'lucide-react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Sidebar } from './components/Sidebar';
@@ -80,6 +80,17 @@ const AppContent: React.FC = () => {
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [notificationPanelOpen, setNotificationPanelOpen] = useState(false);
+
+  useEffect(() => {
+    const handlePickerClick = (event: MouseEvent) => {
+      const input = event.target;
+      if (!(input instanceof HTMLInputElement) || (input.type !== 'date' && input.type !== 'time')) return;
+      if (typeof input.showPicker === 'function') input.showPicker();
+    };
+
+    document.addEventListener('click', handlePickerClick);
+    return () => document.removeEventListener('click', handlePickerClick);
+  }, []);
 
   if (isLoading) {
     return (

@@ -75,6 +75,8 @@ Read this first when the project folder is uploaded again. It records what the a
    - Browser-checked task date, overdue rescheduling, Quick Links add/sidebar visibility, footer links, and quote display on an isolated local origin.
 10. **Calendar event deletion**
    - Existing events can be deleted from the event edit dialog, with a confirmation prompt and visible error feedback if deletion fails.
+11. **Date and time pickers**
+   - Clicking date or time inputs opens the browser's native picker where supported; other browsers retain their built-in input behavior.
 
 ## Current dashboard widget IDs
 `todayTasks`, `dailyProgress`, `dailyQuote`, `upcomingEvents`, `upcomingBirthdays`, `habitOverview`, `goalProgress`, `budgetOverview`, `fitnessSummary`, `dailyChecklist`, `upcomingTrips`, `focusTimer`, `overdueTasks` (banner above the grid), `quickNotes`, `quickLinks`.
