@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, Clock, MapPin, Tag, Repeat, AlertCircle } from 'lucide-react';
+import { X, Calendar, Clock, MapPin, Tag, Repeat, AlertCircle, Trash2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { CalendarEvent, EventCategory, RecurrencePattern } from '../../types';
 import { getTodayDateString } from '../../utils/helpers';
@@ -27,7 +27,7 @@ const CATEGORIES: { label: string; value: EventCategory; color: string }[] = [
 ];
 
 export const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, event, defaultDate }) => {
-  const { addEvent, updateEvent } = useApp();
+  const { addEvent, updateEvent, deleteEvent } = useApp();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -41,6 +41,7 @@ export const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, event, 
   const [reminder, setReminder] = useState(true);
   const [recurrence, setRecurrence] = useState<RecurrencePattern>('none');
   const [error, setError] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (event) {
@@ -117,6 +118,20 @@ export const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, event, 
     }
 
     onClose();
+  };
+
+  const handleDelete = async () => {
+    if (!event || !window.confirm('Delete this event? This cannot be undone.')) return;
+
+    setIsDeleting(true);
+    try {
+      await deleteEvent(event.id);
+      onClose();
+    } catch (deleteError) {
+      console.error('Unable to delete event:', deleteError);
+      setError('Unable to delete the event. Please try again.');
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -293,20 +308,35 @@ export const EventModal: React.FC<EventModalProps> = ({ isOpen, onClose, event, 
             />
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-theme">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl text-sm font-medium text-secondary-theme hover:bg-card-hover transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-5 py-2 rounded-xl text-sm font-semibold bg-accent-theme text-white hover:bg-accent-hover transition-colors shadow-sm"
-            >
-              {event ? 'Update Event' : 'Schedule Event'}
-            </button>
+          <div className="flex items-center justify-between gap-3 pt-4 border-t border-theme">
+            {event ? (
+              <button
+                type="button"
+                onClick={() => void handleDelete()}
+                disabled={isDeleting}
+                className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-rose-500 hover:bg-rose-500/10 disabled:opacity-50"
+              >
+                <Trash2 className="h-4 w-4" />
+                Delete Event
+              </button>
+            ) : <span />}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                disabled={isDeleting}
+                className="px-4 py-2 rounded-xl text-sm font-medium text-secondary-theme hover:bg-card-hover transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isDeleting}
+                className="px-5 py-2 rounded-xl text-sm font-semibold bg-accent-theme text-white hover:bg-accent-hover transition-colors shadow-sm disabled:opacity-50"
+              >
+                {event ? 'Update Event' : 'Schedule Event'}
+              </button>
+            </div>
           </div>
         </form>
       </div>

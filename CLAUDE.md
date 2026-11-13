@@ -73,6 +73,8 @@ Read this first when the project folder is uploaded again. It records what the a
    - Added an app footer crediting Aman and linking to LinkedIn, Instagram, and GitHub.
    - Quote sections now display only the quote and its attribution. The generated originals are attributed to DayFlow; category labels are not displayed.
    - Browser-checked task date, overdue rescheduling, Quick Links add/sidebar visibility, footer links, and quote display on an isolated local origin.
+10. **Calendar event deletion**
+   - Existing events can be deleted from the event edit dialog, with a confirmation prompt and visible error feedback if deletion fails.
 
 ## Current dashboard widget IDs
 `todayTasks`, `dailyProgress`, `dailyQuote`, `upcomingEvents`, `upcomingBirthdays`, `habitOverview`, `goalProgress`, `budgetOverview`, `fitnessSummary`, `dailyChecklist`, `upcomingTrips`, `focusTimer`, `overdueTasks` (banner above the grid), `quickNotes`, `quickLinks`.
