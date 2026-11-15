@@ -52,7 +52,7 @@ export const PwaUpdatePrompt: React.FC = () => {
           type="button"
           onClick={() => void handleUpdate()}
           disabled={isUpdating}
-          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-accent-theme px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
+          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-xl bg-accent-theme px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
         >
           <RefreshCw className={`h-3.5 w-3.5 ${isUpdating ? 'animate-spin' : ''}`} />
           Reload to update
@@ -62,7 +62,7 @@ export const PwaUpdatePrompt: React.FC = () => {
         type="button"
         onClick={dismiss}
         aria-label="Dismiss update message"
-        className="shrink-0 rounded-lg p-2 text-secondary-theme transition-colors hover:bg-card-hover hover:text-primary-theme"
+        className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg p-2 text-secondary-theme transition-colors hover:bg-card-hover hover:text-primary-theme"
       >
         <X className="h-4 w-4" />
       </button>
