@@ -1,0 +1,17 @@
+# DayFlow cross-device sync options
+
+DayFlow currently stores records in browser IndexedDB and has no backend. Signing in on another device cannot retrieve local records unless those records are written to shared storage or relayed through a service. No authentication or sync has been implemented, and no storage approach is approved yet.
+
+## Options
+
+| Approach | Data flow | Privacy | Offline behavior | Conflict handling | Likely costs |
+| --- | --- | --- | --- | --- | --- |
+| **User-owned cloud storage** (recommended) | The user authorizes DayFlow with a provider such as Google Drive or OneDrive. Each client reads/writes an app-specific data file or folder in that user's account. | DayFlow does not operate a content database. The selected storage provider still stores the records; OAuth access must be narrow, and tokens must be protected on-device. | IndexedDB remains the local working copy. Changes queue locally and sync after connectivity returns. | Clients need version checks and record-level merging. Concurrent edits to the same record need an explicit rule or user resolution; a single snapshot file can create conflicts. | No DayFlow database bill, but provider quotas, OAuth setup/review, app hosting, and support still apply. Users need an account with the chosen provider. |
+| **DayFlow-managed backend** | Clients authenticate to a DayFlow API, which stores account records in a database/object store and distributes changes to other devices. | DayFlow retains user content and is responsible for access controls, retention/deletion, backups, incident response, and applicable privacy obligations. Encryption in transit/at rest does not mean DayFlow cannot access content. | Local IndexedDB can queue writes; sync resumes when online. | A server can assign versions and merge independent record changes. Same-record conflicts still need a clear policy and possibly user choice. | Hosting, database, backups, authentication, logs, and bandwidth can incur ongoing costs. Free tiers have limits and are not a cost guarantee. |
+| **Temporary sync relay** | Devices send encrypted change payloads through a relay that holds them until other devices receive them. | The relay may not understand encrypted payloads, but it still handles and temporarily retains content and metadata. Key management and expiration must be designed. | The local client queues changes until it reconnects; offline devices cannot receive changes until they return. | The relay can order events, but clients still need versioning, duplicate detection, and conflict resolution. | Requires an always-available service and secure key/session handling. It has ongoing hosting and operational costs; temporary retention is still storage. |
+
+## Recommendation and approval gate
+
+Given the preference that DayFlow not retain users' content, start by evaluating user-owned storage with an app-specific provider folder and OAuth authorization. It keeps records in the user's provider account rather than a DayFlow database, but the provider still stores them and DayFlow still needs to handle OAuth, local tokens, migrations, offline queues, and conflicts. This option is not yet selected.
+
+Before any authentication or sync code, approve the provider and data flow. Until then, DayFlow remains local-only. No backend, cloud resources, AWS credentials, or deployment should be added or used without separate explicit approval.
