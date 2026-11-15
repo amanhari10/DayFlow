@@ -18,7 +18,6 @@ import {
   Volume2,
   FileSpreadsheet,
   AlertTriangle,
-  Sparkles,
   Check,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
@@ -113,8 +112,6 @@ export const SettingsView: React.FC = () => {
     tasks,
     events,
     birthdays,
-    loadSampleData,
-    purgeDemoData,
     resetAllData,
     exportBackup,
     importBackup,
@@ -184,21 +181,6 @@ export const SettingsView: React.FC = () => {
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
-  };
-
-  // Demo Data Handlers
-  const handleLoadDemo = async () => {
-    await loadSampleData();
-    setActionMessage('Sample demo records loaded.');
-    setTimeout(() => setActionMessage(null), 3000);
-  };
-
-  const handlePurgeDemo = async () => {
-    const result = await purgeDemoData();
-    setActionMessage(
-      `Removed ${result.tasks} tasks, ${result.events} events, ${result.birthdays} birthdays, and ${result.habits} habits.`
-    );
-    setTimeout(() => setActionMessage(null), 4000);
   };
 
   const handleFactoryReset = async () => {
@@ -606,34 +588,7 @@ export const SettingsView: React.FC = () => {
         </div>
       </div>
 
-      {/* SECTION 7: DEMO DATA MANAGEMENT */}
-      <div className="bg-card-theme rounded-2xl border border-theme shadow-xs p-6 space-y-4">
-        <div className="pb-3 border-b border-theme">
-          <h3 className="font-bold text-base text-primary-theme flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-amber-500" /> Sample Demo Data Controls
-          </h3>
-          <p className="text-xs text-secondary-theme">
-            You can load realistic sample tasks, events, birthdays, and habits for testing, or clean them up anytime with one click.
-          </p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center gap-3">
-          <button
-            onClick={handleLoadDemo}
-            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-secondary-theme border border-theme text-xs font-semibold hover:bg-card-hover transition-colors"
-          >
-            Load Sample Demo Records
-          </button>
-          <button
-            onClick={handlePurgeDemo}
-            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs font-semibold hover:bg-amber-500/20 transition-colors"
-          >
-            Purge Only Demo Records
-          </button>
-        </div>
-      </div>
-
-      {/* SECTION 8: DANGER ZONE */}
+      {/* SECTION 7: DANGER ZONE */}
       <div className="bg-rose-500/5 rounded-2xl border border-rose-500/20 p-6 space-y-4">
         <div className="pb-2 border-b border-rose-500/20">
           <h3 className="font-bold text-base text-rose-500 flex items-center gap-2">
