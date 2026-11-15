@@ -71,46 +71,47 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar, onOpenNotif
   const quickAddShortcut = formatShortcut('N', true);
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-sidebar/80 backdrop-blur-md border-b border-theme flex items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-30 h-16 bg-sidebar/80 backdrop-blur-md border-b border-theme flex items-center justify-between gap-2 px-3 sm:px-6">
       {/* Left: Mobile hamburger & Greeting / Date */}
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 flex-1 items-center gap-3">
         <button
           onClick={onOpenMobileSidebar}
-          className="p-2 -ml-2 rounded-xl text-secondary-theme hover:bg-card-hover md:hidden transition-colors"
+          className="flex min-h-11 min-w-11 -ml-2 items-center justify-center rounded-xl p-2 text-secondary-theme transition-colors hover:bg-card-hover xl:hidden"
           aria-label="Open navigation menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div>
-          <h1 className="text-sm sm:text-base font-bold text-primary-theme flex items-center gap-1.5 leading-tight">
-            <span>{greeting}, {settings.name.split(' ')[0]}</span>
+          <h1 className="truncate text-sm font-bold leading-tight text-primary-theme sm:text-base">
+            <span className="hidden sm:inline">{greeting}, {settings.name.split(' ')[0]}</span>
+            <span className="sm:hidden">{settings.name.split(' ')[0]}</span>
             <span className="hidden sm:inline-block">👋</span>
           </h1>
-          <p className="text-[11px] text-secondary-theme hidden sm:block">
+          <p className="hidden text-[11px] text-secondary-theme xl:block">
             {formattedToday}
           </p>
         </div>
       </div>
 
       {/* Middle & Right: Search, Quick Add, Pomodoro Status, Notification Bell */}
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex shrink-0 items-center gap-1 sm:gap-2 lg:gap-3">
         {/* Search Bar Trigger */}
         <button
           onClick={() => setIsSearchOpen(true)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-card-theme border border-theme text-secondary-theme hover:border-strong-theme text-xs font-medium transition-colors cursor-pointer group shadow-xs"
+          className="group flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl border border-theme bg-card-theme px-3 py-1.5 text-xs font-medium text-secondary-theme shadow-xs transition-colors hover:border-strong-theme"
           title={`Search anything (${searchShortcut})`}
         >
           <Search className="w-3.5 h-3.5 group-hover:text-primary-theme" />
-          <span className="hidden md:inline">Quick Search...</span>
-          <kbd className="hidden md:inline-block text-[10px] px-1.5 py-0.5 rounded-sm bg-secondary-theme text-muted-theme font-mono">
+          <span className="hidden lg:inline">Quick Search...</span>
+          <kbd className="hidden xl:inline-block text-[10px] px-1.5 py-0.5 rounded-sm bg-secondary-theme text-muted-theme font-mono">
             {searchShortcut}
           </kbd>
         </button>
 
         {/* Focus Timer Mini Pill (Header) */}
         {activeView !== 'focus' && (
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-secondary-theme border border-theme text-xs font-mono">
+          <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-secondary-theme border border-theme text-xs font-mono">
             <span
               onClick={() => setActiveView('focus')}
               className="cursor-pointer font-bold text-primary-theme hover:text-accent-theme transition-colors"
@@ -131,7 +132,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar, onOpenNotif
         {/* Quick Add Button */}
         <button
           onClick={() => setIsQuickAddOpen(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accent-theme text-white text-xs font-semibold hover:bg-accent-hover transition-colors shadow-xs"
+          className="flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-xl bg-accent-theme px-3 py-1.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-accent-hover"
           title={`Quick Add (${quickAddShortcut})`}
         >
           <Plus className="w-3.5 h-3.5" />
@@ -144,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileSidebar, onOpenNotif
         {/* Notification Bell */}
         <button
           onClick={onOpenNotifications}
-          className="p-2 rounded-xl text-secondary-theme hover:bg-card-hover hover:text-primary-theme transition-colors relative"
+          className="relative flex min-h-11 min-w-11 items-center justify-center rounded-xl p-2 text-secondary-theme transition-colors hover:bg-card-hover hover:text-primary-theme"
           aria-label="View notifications and reminders"
         >
           <Bell className="w-4 h-4" />

@@ -215,16 +215,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, setMobileOpen }) =
       {/* Mobile Backdrop */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 md:hidden backdrop-blur-xs"
+          className="fixed inset-0 z-40 bg-black/50 xl:hidden backdrop-blur-xs"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed md:sticky top-0 left-0 z-40 h-screen bg-sidebar border-r border-theme flex flex-col justify-between transition-all duration-200 select-none ${
-          mobileOpen ? 'translate-x-0 w-72' : '-translate-x-full md:translate-x-0'
-        } ${sidebarCollapsed ? 'md:w-20' : 'md:w-72'}`}
+        className={`fixed xl:sticky top-0 left-0 z-40 h-screen bg-sidebar border-r border-theme flex flex-col justify-between transition-all duration-200 select-none ${
+          mobileOpen ? 'translate-x-0 w-72' : '-translate-x-full xl:translate-x-0'
+        } ${sidebarCollapsed ? 'xl:w-20' : 'xl:w-72'}`}
       >
         {/* Brand / Logo */}
         <div className="p-4 border-b border-theme flex items-center justify-between">
@@ -250,7 +250,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, setMobileOpen }) =
           {/* Desktop collapse toggle */}
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="hidden md:flex p-1.5 rounded-lg text-secondary-theme hover:bg-card-hover transition-colors"
+            className="hidden xl:flex p-1.5 rounded-lg text-secondary-theme hover:bg-card-hover transition-colors"
             title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {sidebarCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
